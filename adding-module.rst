@@ -63,7 +63,6 @@ structure. Open the ``mymodule.c`` file and put this code inside:
     #include "py/obj.h"
     #include "py/runtime.h"
     #include "py/binary.h"
-    #include "portmodules.h"
 
     STATIC const mp_map_elem_t mymodule_globals_table[] = {
         { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_mymodule) },
@@ -126,9 +125,9 @@ actually add that function object to our module:
 
 .. code-block:: c
 
-    STATIC const mp_map_elem_t mymodule_globals_table[] = {
+    STATIC const mp_rom_map_elem_t mymodule_globals_table[] = {
         { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_mymodule) },
-        { MP_OBJ_NEW_QSTR(MP_QSTR_hello), (mp_obj_t)&mymodule_hello_obj },
+        { MP_OBJ_NEW_QSTR(MP_QSTR_hello), MP_ROM_PTR(&mymodule_hello_obj) },
     };
 
 Micropython uses the QSTR-macros to define constant strings. This is used to 
